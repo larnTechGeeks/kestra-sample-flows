@@ -44,8 +44,8 @@ services:
           server:
             basic-auth:
               enabled: true
-              username: "payherokenya@gmail.com" # it must be a valid email address
-              password: PayheroKesTRA$DEv£301!
+              username: "vincentedepaulo@gmail.com" # it must be a valid email address
+              password: Dev££$DEv£301!
           repository:
             type: postgres
           storage:
