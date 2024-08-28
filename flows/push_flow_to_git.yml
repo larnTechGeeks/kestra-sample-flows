@@ -1,0 +1,15 @@
+id: push_flow_to_git
+namespace: development
+
+tasks:
+  - id: commit_and_push
+    type: io.kestra.plugin.git.PushFlows
+    url: https://github.com/larnTechGeeks/kestra-sample-flows
+    username: larnTechGeeks
+    password: "{{ secret('GITHUB_ACCESS_TOKEN') }}"
+    branch: development
+    sourceNamespace: development
+    targetNamespace: production
+    gitDirectory: flows
+    commitMessage: "Kestra production flows"
+    dryRun: false

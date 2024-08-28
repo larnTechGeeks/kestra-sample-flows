@@ -1,0 +1,19 @@
+id: run-github-sync
+namespace: development
+
+tasks:
+  - id: sync_flows
+    type: io.kestra.plugin.git.SyncFlows
+    username: larnTechGeeks
+    password: "{{ secret('GITHUB_ACCESS_TOKEN') }}"
+    url: https://github.com/larnTechGeeks/kestra-sample-flows
+    branch: deployments
+    targetNamespace: development
+    gitDirectory: flows
+    includeChildNamespaces: true
+    dryRun: false
+
+triggers:
+  - id: gh_webhook
+    type: io.kestra.core.models.triggers.types.Schedule
+    cron: "* 0 * * *"

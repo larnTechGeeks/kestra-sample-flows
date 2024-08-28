@@ -1,0 +1,24 @@
+id: run-analytics
+namespace: development
+
+tasks:
+  - id: wdir
+    type: io.kestra.plugin.core.flow.WorkingDirectory
+    tasks:
+      - id: cloneRepository
+        type: io.kestra.plugin.git.Clone
+        url: https://github.com/larnTechGeeks/kestra-demo-pipeline
+        username: larnTechGeeks
+        password: "{{ secret('GITHUB_ACCESS_TOKEN') }}"
+        branch: development
+
+      - id: gitPythonScripts
+        type: io.kestra.plugin.scripts.python.Commands
+        warningOnStdErr: false
+        beforeCommands:
+          - pip install -r requirements.txt
+        commands:
+          - python scripts/elt_script.py
+          - python scripts/generate_orders.py
+        outputFiles:
+          - orders.csv
